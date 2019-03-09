@@ -5,7 +5,7 @@
 ## Introduction
 This software was created to allow the Doepfer D3M keyboard to control parameters, change MIDI settings and arm instruments on the fly, using only the onboard buttons.
 
-The interface takes inputs from the D3M, modifies them and outputs them to some loopback MIDI interface. This makes it possible to modify the MIDI data before it reaches a sound generator. The software also focuses on making the on-board LEDs actually function in various modes. There is also some multiplexing of outputs using the preset banks, which gives a lot more control surface.
+The interface takes inputs from the D3M, modifies them and outputs them to some loopback MIDI interface. This makes it possible to modify the MIDI data before it reaches a sound generator. The software also focuses on making the onboard LEDs actually function in various modes. There is also some multiplexing of outputs using the preset banks, which gives a lot more control surface.
 
 ## Requirements
 * Python 3+
@@ -13,39 +13,39 @@ The interface takes inputs from the D3M, modifies them and outputs them to some 
 
 ## Features
 * Simple and fast integration
+* Keybed split zones for dual channel note transmission
 * Correct LED feedback
 * Onboard detune and octave modification
-* Velocity fix for the black keys*
+* Velocity correction
 * Various modes for DAW remote control
 
-\* a common velocity issue occuring on FATAR keybeds
+## Available Modes
+A mode can be assigned to any available preset bank of choice. The configuration of various modes may be set however you like.
 
-## Control Modes
 ### Track Arm Mode
-Preset Bank 1-2
 * Select a single preset between 1-12
 * Outputs message for pressed button and previous button
 * Useful to arm track and switch instruments
-* Allows for a total of 24 tracks
 
-### Control Mode
-Preset Bank 3-4
-* Toggle any preset between 1-12
-* Outputs message for pressed button
-* Useful to toggle effects and switches
+### Split Mode
+* Splits the keybed into two channels
+* Select a split zone between any octave
+* Useful when playing two instruments at once
 
 ### Detune Mode
-Preset Bank 5
 * Detunes outgoing keyboard data
-* Preset number 8 represents the C key and 12 is the E key
-* If the bank is changed, the latest selection will be used
+* Select a offset using the number buttons
+* Can modify both output channels independently
+
+### Momentary Mode
+* Press and release buttons to fire consequent MIDI commands
+* Useful for DAW remote control
 
 ### Octave Mode
-Preset Bank 6
 * Changes the octave output of the keyboard
-* Select higher or lower octaves using the number buttons (preset 8 is the default setting)
+* Select higher or lower octaves using the number buttons
+* Select the octave for both zones independetly
 
-### Daisy Chain Mode
-Preset Bank 7-10
-* Reserved for secondary keyboard
-* Not yet released!
+### Trigger Mode
+* Press to fire a single MIDI command
+* Useful for DAW remote control
