@@ -5,7 +5,7 @@
 ## Introduction
 This software was created to allow the Doepfer D3M keyboard to control parameters, change MIDI settings and arm instruments on the fly, using only the onboard buttons.
 
-The interface takes inputs from the D3M, modifies them and outputs them to some loopback MIDI interface. This makes it possible to modify the MIDI data before it reaches a sound generator. The software also focuses on making the onboard LEDs actually function in various modes. There is also some multiplexing of outputs using the preset banks, which gives a lot more control surface.
+The interface takes inputs from the D3M, modifies them and outputs them to a loopback MIDI interface. This makes it possible to modify the MIDI data before it reaches the sound generator. The software also focuses on making the onboard LEDs actually function in various modes. There is also multiplexing of outputs using the preset banks, which gives a lot more control surface.
 
 ## Requirements
 * Python 3+
@@ -19,13 +19,13 @@ The interface takes inputs from the D3M, modifies them and outputs them to some 
 * Velocity correction
 * Various modes for DAW remote control
 
-## Available Modes
+## Modes
 A mode can be assigned to any available preset bank of choice. The configuration of various modes may be set however you like.
 
 ### Track Arm Mode
 * Select a single preset between 1-12
 * Outputs message for pressed button and previous button
-* Useful to arm track and switch instruments
+* Useful to arm tracks and switch between instruments
 
 ### Split Mode
 * Splits the keybed into two channels
@@ -36,10 +36,6 @@ A mode can be assigned to any available preset bank of choice. The configuration
 * Detunes outgoing keyboard data
 * Select a offset using the number buttons
 
-### Momentary Mode
-* Press and release buttons to fire consequent MIDI commands
-* Useful for DAW remote control
-
 ### Octave Mode
 * Changes the octave output of the keyboard
 * Select higher or lower octaves using the number buttons
@@ -47,4 +43,8 @@ A mode can be assigned to any available preset bank of choice. The configuration
 
 ### Trigger Mode
 * Press to fire a single MIDI command
+* Useful for DAW remote control
+
+### Momentary Mode
+* Press and release buttons to fire consequent MIDI commands
 * Useful for DAW remote control
