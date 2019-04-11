@@ -35,7 +35,6 @@ A mode can be assigned to any available preset bank of choice. The configuration
 ### Detune Mode
 * Detunes outgoing keyboard data
 * Select a offset using the number buttons
-* Can modify both output channels independently
 
 ### Momentary Mode
 * Press and release buttons to fire consequent MIDI commands
