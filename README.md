@@ -14,37 +14,7 @@ The interface takes inputs from the D3M, modifies them and outputs them to a loo
 ## Features
 * Simple and fast integration
 * Keybed split zones for dual channel note transmission
-* Correct LED feedback
-* Onboard detune and octave modification
-* Velocity correction
-* Various modes for DAW remote control
-
-## Modes
-A mode can be assigned to any available preset bank of choice. The configuration of various modes may be set however you like.
-
-### Track Arm Mode
-* Select a single preset between 1-12
-* Outputs message for pressed button and previous button
-* Useful to arm tracks and switch between instruments
-
-### Split Mode
-* Splits the keybed into two channels
-* Select a split zone between any octave
-* Useful when playing two instruments at once
-
-### Detune Mode
-* Detunes outgoing keyboard data
-* Select a offset using the number buttons
-
-### Octave Mode
-* Changes the octave output of the keyboard
-* Select higher or lower octaves using the number buttons
-* Select the octave for both zones independetly
-
-### Trigger Mode
-* Press to fire a single MIDI command
-* Useful for DAW remote control
-
-### Momentary Mode
-* Press and release buttons to fire consequent MIDI commands
-* Useful for DAW remote control
+* LED feedback
+* Onboard detune and octave shift
+* Velocity correction (fixes common FATAR waterfall keybed issue)
+* Different DAW remote control modes
