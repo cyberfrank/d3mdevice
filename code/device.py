@@ -29,9 +29,9 @@ class D3MDevice:
 		self.modes = []
 		self.modes.insert(0, TrackArmMode(0)) 			# track arm
 		self.modes.insert(1, TrackArmMode(1)) 			# track arm
-		self.modes.insert(2, SplitMode())				# select split zone
-		self.modes.insert(3, OctaveMode())				# octave channel 2 and 1
-		self.modes.insert(4, DetuneMode())				# detune all channels
+		self.modes.insert(2, SplitMode())			# select split zone
+		self.modes.insert(3, OctaveMode())			# octave channel 2 and 1
+		self.modes.insert(4, DetuneMode())			# detune all channels
 		self.modes.insert(6, TrackArmMode(2)) 			# track arm
 		self.modes.insert(7, TrackArmMode(3)) 			# track arm
 		self.modes.insert(8, MomentaryMode(4)) 			# momentary buttons (dual fire event)
