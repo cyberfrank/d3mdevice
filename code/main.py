@@ -5,11 +5,11 @@ from rtmidi.midiutil import open_midiport
 
 # TODO: add custom selection screen
 try:
-    midiin, input_name = open_midiport(None,'input')
-    midiout, output_name = open_midiport(None, 'output')
-    loopback, virtual_name = open_midiport(None, 'output')
+    	midiin, input_name = open_midiport(None,'input')
+    	midiout, output_name = open_midiport(None, 'output')
+    	loopback, virtual_name = open_midiport(None, 'output')
 except (EOFError, KeyboardInterrupt):
-    sys.exit()
+    	sys.exit()
 
 device = D3MDevice(midiin, midiout, loopback)
 try:
