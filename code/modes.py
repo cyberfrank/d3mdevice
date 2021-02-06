@@ -29,7 +29,7 @@ class TrackArmMode(Mode):
 		self.d3m.clear_lights()
 		self.d3m.toggle_light(idx)
 
-		self.d3m.cc_send_on(self.last + (12 * self.offset))
+		self.d3m.cc_send_off(self.last + (12 * self.offset))
 		self.d3m.cc_send_on(self.current + (12 * self.offset))
 
 class DetuneMode(Mode):
