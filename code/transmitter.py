@@ -6,5 +6,5 @@ class Transmitter:
 		self.midi = midi
 
 	def send(self, command, note, velocity, channel=0):
-		command = (NOTE_ON & 0xf0) | (channel & 0xf)
+		command = (command & 0xf0) | (channel & 0xf)
 		self.midi.send_message([command, note, velocity])

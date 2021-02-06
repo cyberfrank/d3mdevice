@@ -7,101 +7,112 @@ class Mode:
 	def on_enter(self):
 		pass
 
-	def on_preset_pressed(self, number):
+	def on_preset_pressed(self, idx):
 		pass
 
-	def on_preset_released(self, number):
+	def on_preset_released(self, idx):
 		pass
 
 class TrackArmMode(Mode):
 	def __init__(self, offset):
-		self.currSelection = 0
-		self.prevSelection = 0
-		self.offset = offset + 1
+		self.current = 0
+		self.last = 0
+		self.offset = offset
 
 	def on_enter(self):
-		self.d3m.toggle_light(self.currSelection)
+		self.d3m.toggle_light(self.current)
 
-	def on_preset_pressed(self, number):
-		self.prevSelection = self.currSelection
-		self.currSelection = number
+	def on_preset_pressed(self, idx):
+		self.last = self.current
+		self.current = idx
 
 		self.d3m.clear_lights()
-		self.d3m.toggle_light(number)
+		self.d3m.toggle_light(idx)
 
-		self.d3m.transmit_message(self.prevSelection * self.offset)
-		self.d3m.transmit_message(self.currSelection * self.offset)
+		self.d3m.cc_send_on(self.last + (12 * self.offset))
+		self.d3m.cc_send_on(self.current + (12 * self.offset))
 
 class DetuneMode(Mode):
 	def __init__(self):
-		self.currDetune = 0
+		self.detune = 0
 
 	def on_enter(self):
-		self.d3m.toggle_light(self.currDetune)
+		self.d3m.toggle_light(self.detune)
 
-	def on_preset_pressed(self, number):
-		self.currDetune = number
-		self.d3m.detune = self.currDetune
-
+	def on_preset_pressed(self, idx):
+		self.detune = idx
+		self.d3m.detune = idx
 		self.d3m.clear_lights()
-		self.d3m.toggle_light(number)
+		self.d3m.toggle_light(idx)
 
 class OctaveMode(Mode):
 	def __init__(self):
-		self.currOctave = [9, 4]
+		self.octave = [9, 4]
 
 	def on_enter(self):
-		self.d3m.toggle_light(self.currOctave[SPLIT_LEFT])
-		self.d3m.toggle_light(self.currOctave[SPLIT_RIGHT])
+		self.d3m.toggle_light(self.octave[SPLIT_LEFT])
+		self.d3m.toggle_light(self.octave[SPLIT_RIGHT])
 
-	def on_preset_pressed(self, number):
-		if number > 5:
-			self.currOctave[SPLIT_RIGHT] = number
+	def on_preset_pressed(self, idx):
+		if idx > 5:
+			self.octave[SPLIT_RIGHT] = idx
 			# convert to range (-3 -> 2)
-			self.d3m.octave[SPLIT_RIGHT] = number - 9
+			self.d3m.octave[SPLIT_RIGHT] = idx - 9
 		else:
-			self.currOctave[SPLIT_LEFT] = number
+			self.octave[SPLIT_LEFT] = idx
 			# convert to range (-3 -> 2)
-			self.d3m.octave[SPLIT_LEFT] = number - 3
+			self.d3m.octave[SPLIT_LEFT] = idx - 3
 
 		self.d3m.clear_lights()
-		self.d3m.toggle_light(self.currOctave[SPLIT_LEFT])
-		self.d3m.toggle_light(self.currOctave[SPLIT_RIGHT])
+		self.d3m.toggle_light(self.octave[SPLIT_LEFT])
+		self.d3m.toggle_light(self.octave[SPLIT_RIGHT])
 
 class SplitMode(Mode):
 	def __init__(self):
-		self.currZone = 0
+		self.zone = 0
 
 	def on_enter(self):
-		self.d3m.toggle_light(self.currZone)
+		self.d3m.toggle_light(self.zone)
 
-	def on_preset_pressed(self, number):
-		if number < NUM_SPLIT_ZONES:
-			self.currZone = number
-			self.d3m.splitZone = self.currZone
+	def on_preset_pressed(self, idx):
+		if idx < NUM_SPLIT_ZONES:
+			self.zone = idx
+			self.d3m.zone = idx
 
 			self.d3m.clear_lights()
-			self.d3m.toggle_light(number)
+			self.d3m.toggle_light(idx)
 
 class MomentaryMode(Mode):
 	def __init__(self, offset):
-		self.offset = offset + 1
+		self.offset = offset
 
-	def on_preset_pressed(self, number):
-		self.d3m.toggle_light(number, True)
-		self.d3m.transmit_message(number * self.offset)
+	def on_preset_pressed(self, idx):
+		self.d3m.toggle_light(idx, True)
+		self.d3m.cc_send_on(idx + (12 * self.offset))
 
-	def on_preset_released(self, number):
-		self.d3m.toggle_light(number, False)
-		self.d3m.transmit_message(number * self.offset)
+	def on_preset_released(self, idx):
+		self.d3m.toggle_light(idx, False)
+		self.d3m.cc_send_off(idx + (12 * self.offset))
 
 class TriggerMode(Mode):
 	def __init__(self, offset):
-		self.offset = offset + 1
+		self.offset = offset
 
-	def on_preset_pressed(self, number):
-		self.d3m.toggle_light(number, True)
-		self.d3m.transmit_message(number * self.offset)
+	def on_preset_pressed(self, idx):
+		self.d3m.toggle_light(idx, True)
+		self.d3m.cc_send_on(idx + (12 * self.offset))
 
-	def on_preset_released(self, number):
-		self.d3m.toggle_light(number, False)
+	def on_preset_released(self, idx):
+		self.d3m.toggle_light(idx, False)
+
+class TestMode(Mode):
+	def __init__(self):
+		self.count = 0
+
+	def on_preset_pressed(self, idx):
+		for i in range(12):
+			if i % 2 == self.count % 2:
+				self.d3m.toggle_light(i, True)
+			else:
+				self.d3m.toggle_light(i, False)
+		self.count += 1
