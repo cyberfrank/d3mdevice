@@ -69,15 +69,15 @@ class OctaveMode(Mode):
 
 class SplitMode(Mode):
 	def __init__(self):
-		self.zone = 0
+		self.split_zone = 0
 
 	def on_enter(self):
-		self.d3m.toggle_light(self.zone)
+		self.d3m.toggle_light(self.split_zone)
 
 	def on_preset_pressed(self, idx):
 		if idx < NUM_SPLIT_ZONES:
-			self.zone = idx
-			self.d3m.zone = idx
+			self.split_zone = idx
+			self.d3m.split_zone = idx
 
 			self.d3m.clear_lights()
 			self.d3m.toggle_light(idx)
